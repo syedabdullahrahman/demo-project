@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, elementAt, Observable } from 'rxjs';
 import { Tutorial } from '../models/tutorial.model';
 
-const baseUrl = 'http://todo-sync-token.herokuapp.com/api/tutorials';
+const baseUrl = 'https://todo-sync-token.herokuapp.com/api/tutorials';
 
 @Injectable({
   providedIn: 'root'
