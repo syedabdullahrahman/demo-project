@@ -1,0 +1,38 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="#">Tutorial Website</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <div class="d-flex flex-row">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a routerLink="tutorials" class="nav-link text-light"
+                >Tutorials</a
+              >
+            </li>
+            <li class="nav-item">
+              <a routerLink="add" class="nav-link text-light">Add</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex flex-row-reverse">
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>
