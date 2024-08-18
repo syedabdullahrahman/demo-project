@@ -12,8 +12,28 @@ import { TutorialService } from './services/tutorial.service';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { MockTutorialService } from './services/mock.tutorial.service';
 import { environment } from 'src/environments/environment';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { RouterModule } from '@angular/router';
 
+export const initializeKeycloak = (keycloak: KeycloakService) => async () => {
+  if (environment.keycloak.enable) {
+    keycloak.init({
+      config: {
+        url: environment.keycloak.authority,
+        realm: environment.keycloak.realm,
+        clientId: environment.keycloak.clientId,
+      },
+      loadUserProfileAtStartUp: true,
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html',
+        checkLoginIframe: false,
+        redirectUri: environment.keycloak.redirectUri,
+      },
+    });
+  }
+};
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -25,12 +45,19 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
+    KeycloakAngularModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
     { provide: APP_BASE_HREF, useValue: '/' },
     {
       provide: TutorialService,

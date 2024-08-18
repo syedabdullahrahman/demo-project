@@ -4,6 +4,14 @@
 
 export const environment = {
   production: false,
+  keycloak: {
+    enable: true,
+    authority: 'http://localhost:8888',
+    redirectUri: 'http://localhost:4200',
+    postLogoutRedirectUri: 'http://localhost:4200/logout',
+    realm: 'Tutorial-web',
+    clientId: 'angular-fe-client',
+  },
 };
 
 /*
