@@ -11,6 +11,7 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 export class TutorialDetailsComponent implements OnInit {
 
   currentTutorial: Tutorial = {
+    id: '',
     title: '',
     description: '',
     published: false
@@ -30,6 +31,7 @@ export class TutorialDetailsComponent implements OnInit {
     this.tutorialService.get(id)
       .subscribe(
         data => {
+          debugger
           this.currentTutorial = data;
           console.log(data);
         },

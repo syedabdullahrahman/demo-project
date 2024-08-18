@@ -13,6 +13,7 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
 import { TutorialService } from './services/tutorial.service';
 import { APP_BASE_HREF } from '@angular/common';
+import { MockTutorialService } from './services/mock.tutorial.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { APP_BASE_HREF } from '@angular/common';
     FormsModule,
   ],
   providers: [
-    {provide: APP_BASE_HREF, useValue: '/'},
+    { provide: APP_BASE_HREF, useValue: '/' },
     AlertServiceService,
-    TutorialService
+    { provide: TutorialService, useClass: MockTutorialService }
+
   ],
   bootstrap: [AppComponent]
 })

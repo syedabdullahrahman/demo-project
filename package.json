@@ -1,49 +1,50 @@
 {
   "name": "demo-angular-project",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "ng build --prod"
-  },
-  "engines": {
-    "node": "16.10",
-    "npm": "6.14.5"
+    "lint": "ng lint --force",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~13.2.0",
-    "@angular/cli": "~13.2.5",
-    "@angular/common": "~13.2.0",
-    "@angular/compiler": "~13.2.0",
-    "@angular/compiler-cli": "~13.2.0",
-    "@angular/core": "~13.2.0",
-    "@angular/forms": "~13.2.0",
-    "@angular/platform-browser": "~13.2.0",
-    "@angular/platform-browser-dynamic": "~13.2.0",
-    "@angular/router": "~13.2.0",
-    "express": "^4.17.3",
-    "path": "^0.12.7",
-    "rxjs": "~7.5.0",
+    "@angular/animations": "18.0.0",
+    "@angular/common": "18.0.0",
+    "@angular/compiler": "18.0.0",
+    "@angular/core": "18.0.0",
+    "@angular/forms": "18.0.0",
+    "@angular/platform-browser": "18.0.0",
+    "@angular/platform-browser-dynamic": "18.0.0",
+    "@angular/router": "18.0.0",
+    "@rx-angular/cdk": "18.0.0",
+    "@rx-angular/template": "18.0.0",
+    "marked": "^11.1.0",
+    "rxjs": "^7.4.0",
     "tslib": "^2.3.0",
-    "typescript": "~4.5.2",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.2.5",
-    "@angular/cli": "~13.2.5",
-    "@angular/compiler-cli": "~13.2.0",
-    "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.11.1",
-    "jasmine-core": "~4.0.0",
-    "karma": "~6.3.0",
+    "@angular-devkit/build-angular": "^18.0.1",
+    "@angular/cli": "^18.0.1",
+    "@angular/compiler-cli": "18.0.0",
+    "@types/jasmine": "~4.3.0",
+    "@types/marked": "^6.0.0",
+    "husky": "^8.0.3",
+    "jasmine-core": "~4.5.0",
+    "karma": "~6.4.1",
     "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.1.0",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.5.2"
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "typescript": "~5.4.5"
+  },
+  "lint-staged": {
+    "*.{ts,html,css,json,md}": "prettier --write"
   }
 }

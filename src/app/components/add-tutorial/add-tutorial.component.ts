@@ -10,6 +10,7 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 export class AddTutorialComponent implements OnInit {
 
   tutorial: Tutorial = {
+    id : '',
     title: '',
     description: '',
     published: false
@@ -42,6 +43,7 @@ export class AddTutorialComponent implements OnInit {
   newTutorial(): void {
     this.submitted = false;
     this.tutorial = {
+      id: '',
       title: '',
       description: '',
       published: false
