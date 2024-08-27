@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  keycloak: {
+    enable: true,
+    authority: 'http://localhost:8888',
+    redirectUri: 'http://localhost:9002',
+    postLogoutRedirectUri: 'http://localhost:9002/logout',
+    realm: 'Tutorial-web',
+    clientId: 'angular-fe-client',
+  },
 };
 
 /*
