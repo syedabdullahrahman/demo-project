@@ -1,10 +1,10 @@
 services:
-    paipz-app:
-        build:
-            context: app
-            dockerfile: Dockerfile
-        ports:
-            - 9002:9002
+    # paipz-app:
+    #     build:
+    #         context: app
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - 4200:4200
     postgres:
         image: postgres:14
         container_name: keycloak-postgres

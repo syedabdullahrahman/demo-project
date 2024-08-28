@@ -20,7 +20,6 @@ export class MockTutorialService {
   }
 
   get(id: any): Observable<Tutorial | null> {
-    debugger
     const tutorial = this.tutorials.find(t => t.id === id);
     return of(tutorial || null);
   }

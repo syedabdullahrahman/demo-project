@@ -8,4 +8,4 @@ RUN rm node_modules
 RUN npm i -g @angular/cli
 RUN npm install
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port" , "9002", "--disable-host-check"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]

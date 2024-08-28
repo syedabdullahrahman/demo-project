@@ -31,7 +31,6 @@ export class TutorialDetailsComponent implements OnInit {
     this.tutorialService.get(id)
       .subscribe(
         data => {
-          debugger
           this.currentTutorial = data;
           console.log(data);
         },
