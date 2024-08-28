@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from 'src/app/models/tutorial.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
@@ -7,12 +8,12 @@ import { TutorialService } from 'src/app/services/tutorial.service';
   templateUrl: './tutorials-list.component.html',
   styleUrls: ['./tutorials-list.component.css']
 })
-export class TutorialsListComponent implements OnInit {
+export class TutorialsListComponent implements OnInit{
   tutorials?: Tutorial[];
   currentTutorial: Tutorial = {};
   currentIndex = -1;
   title = '';
-  constructor(private tutorialService: TutorialService) { }
+  constructor(private tutorialService: TutorialService, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.retrieveTutorials();
@@ -60,5 +61,8 @@ export class TutorialsListComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 }

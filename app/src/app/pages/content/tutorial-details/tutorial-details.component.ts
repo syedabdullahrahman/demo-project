@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tutorial } from 'src/app/models/tutorial.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class TutorialDetailsComponent implements OnInit {
   message = '';
   constructor(
     private tutorialService: TutorialService,
+    private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router) { }
   
@@ -57,6 +59,7 @@ export class TutorialDetailsComponent implements OnInit {
           console.log(error);
         });
   }
+
   updateTutorial(): void {
     this.message = '';
     this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
@@ -69,6 +72,7 @@ export class TutorialDetailsComponent implements OnInit {
           console.log(error);
         });
   }
+  
   deleteTutorial(): void {
     this.tutorialService.delete(this.currentTutorial.id)
       .subscribe(
@@ -79,6 +83,22 @@ export class TutorialDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  username() {
+    return this.authService.userName;
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  login() {
+    this.authService.redirectToLoginPage();
   }
 
 }

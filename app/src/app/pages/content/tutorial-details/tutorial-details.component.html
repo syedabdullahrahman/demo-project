@@ -1,32 +1,33 @@
 <div>
-    <div *ngIf="currentTutorial.id" class="edit-form">
-      <h4>Tutorial</h4>
-      <form>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            [(ngModel)]="currentTutorial.title"
-            name="title"
-          />
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            [(ngModel)]="currentTutorial.description"
-            name="description"
-          />
-        </div>
-        <div class="form-group">
-          <label><strong>Status:</strong></label>
-          {{ currentTutorial.published ? "Published" : "Pending" }}
-        </div>
-      </form>
+  <div *ngIf="currentTutorial.id" class="edit-form">
+    <h4>Tutorial</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentTutorial.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentTutorial.description"
+          name="description"
+        />
+      </div>
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentTutorial.published ? "Published" : "Pending" }}
+      </div>
+    </form>
+    <ng-container *ngIf="isLoggedIn()">
       <button
         class="badge badge-primary mr-2"
         *ngIf="currentTutorial.published"
@@ -51,10 +52,12 @@
       >
         Update
       </button>
-      <p>{{ message }}</p>
-    </div>
-    <div *ngIf="!currentTutorial.id">
-      <br />
-      <p>Cannot access this Tutorial...</p>
-    </div>
+    </ng-container>
+
+    <p>{{ message }}</p>
   </div>
+  <div *ngIf="!currentTutorial.id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</div>
