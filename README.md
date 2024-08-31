@@ -1,4 +1,6 @@
-# Keycloak Angular integration
+# Keycloak Angular integration : Securing Angular application step-by-step guide
+
+[Here is the Medium Article](https://medium.com/@syedabdullahrahman/keycloak-angular-integration-securing-angular-application-step-by-step-bd185333a304)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
