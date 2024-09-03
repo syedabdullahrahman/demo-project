@@ -11,13 +11,31 @@ import { TutorialService } from './services/tutorial.service';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { MockTutorialService } from './services/mock.tutorial.service';
 import { environment } from 'src/environments/environment';
-import { KeycloakAngularModule, KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
+import {
+  KeycloakAngularModule,
+  KeycloakAuthGuard,
+  KeycloakEventType,
+  KeycloakService,
+} from 'keycloak-angular';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const initializeKeycloak = (keycloak: KeycloakService) => async () => {
   if (environment.keycloak.enable) {
-    keycloak.init({
+    /**
+     *  https://www.npmjs.com/package/keycloak-angular#keycloak-js-events
+     *  The callback events from keycloak-js are available through a RxJS subject which is defined by keycloakEvents$.
+     *  For example you make keycloak-angular auto refreshing your access token when expired
+     * 
+     **/
+    keycloak.keycloakEvents$.subscribe({
+      next(event) {
+        if (event.type == KeycloakEventType.OnTokenExpired) {
+          keycloak.updateToken(20);
+        }
+      },
+    });
+    return keycloak.init({
       config: {
         url: environment.keycloak.authority,
         realm: environment.keycloak.realm,
@@ -29,21 +47,21 @@ export const initializeKeycloak = (keycloak: KeycloakService) => async () => {
       loadUserProfileAtStartUp: true,
       initOptions: {
         //   This is an action we specified on keycloak load
-            //   We have two options : 'login-required'|'check-sso'
-            //   If is set to 'login-required' this means your browser will do a full redirect to the Keycloak server and back to your application.
+        //   We have two options : 'login-required'|'check-sso'
+        //   If is set to 'login-required' this means your browser will do a full redirect to the Keycloak server and back to your application.
 
-            // onLoad: 'login-required',
-            // checkLoginIframe: true,
+        // onLoad: 'login-required',
+        // checkLoginIframe: true,
 
-            //   If is set to  'check-sso'  instead this action will be performed in a hidden iframe, so your application resources only need to be loaded and parsed once by the browser.
-            //   Then you will need to add the silentCheckSsoRedirectUri and create a html file   silent-check-sso.html with this content
-            // <html>
-            //    <body>
-            //         <script>
-            //           parent.postMessage(location.href, location.origin);
-            //         </script>
-            //      </body>
-            // </html>
+        //   If is set to  'check-sso'  instead this action will be performed in a hidden iframe, so your application resources only need to be loaded and parsed once by the browser.
+        //   Then you will need to add the silentCheckSsoRedirectUri and create a html file   silent-check-sso.html with this content
+        // <html>
+        //    <body>
+        //         <script>
+        //           parent.postMessage(location.href, location.origin);
+        //         </script>
+        //      </body>
+        // </html>
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri:
           window.location.origin + '/assets/silent-check-sso.html',
@@ -65,7 +83,7 @@ export const initializeKeycloak = (keycloak: KeycloakService) => async () => {
     TutorialsListComponent,
     TutorialDetailsComponent,
     AccessDeniedComponent,
-    NotFoundComponent
+    NotFoundComponent,
     //or Other components as per requirement...
   ],
   imports: [
