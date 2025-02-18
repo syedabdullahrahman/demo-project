@@ -4,10 +4,11 @@ import { AddTutorialComponent } from './pages/admin/add-tutorial/add-tutorial.co
 import { TutorialDetailsComponent } from './pages/content/tutorial-details/tutorial-details.component';
 import { TutorialsListComponent } from './pages/content/tutorials-list/tutorials-list.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AuthGuard } from './guards/auth-guard';
+
 import { LogoutScreenComponent } from './pages/logout-success/logout-success.component';
-import { LogoutRouteGuard } from './guards/logout-guard';
+import { LogoutRouteGuard } from './auth/logout-guard';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 export enum AppRoutes {
   Home = '',
@@ -20,7 +21,7 @@ export enum AppRoutes {
   AnyOther = '**',
 }
 
-const routes: Routes = [
+export const appRoutes: Routes = [
   { path: AppRoutes.Home, redirectTo: AppRoutes.Tutorials, pathMatch: 'full' },
   { path: AppRoutes.Tutorials, component: TutorialsListComponent },
   { path: AppRoutes.TutorialsDetails, component: TutorialDetailsComponent },
@@ -40,9 +41,3 @@ const routes: Routes = [
     component: NotFoundComponent,
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule { }

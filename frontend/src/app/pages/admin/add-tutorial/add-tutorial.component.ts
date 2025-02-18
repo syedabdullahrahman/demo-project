@@ -1,9 +1,14 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
+  standalone: true,
   selector: 'app-add-tutorial',
+  imports: [FormsModule,
+    ReactiveFormsModule, NgIf],
   templateUrl: './add-tutorial.component.html',
   styleUrls: ['./add-tutorial.component.css']
 })

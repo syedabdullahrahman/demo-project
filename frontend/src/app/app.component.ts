@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthenticationService } from './services/authentication.service';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { KeycloakAngularModule } from 'keycloak-angular';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, KeycloakAngularModule,RouterModule,NgIf  ], // Import the standalone component
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'demo-angular-project';
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
@@ -19,7 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   username() {
-    return this.authService.userName;
+    return this.authService.getUsername();
   }
 
   logout() {
@@ -27,6 +31,6 @@ export class AppComponent implements OnInit {
   }
 
   login() {
-    this.authService.redirectToLoginPage();
+    this.authService.login();
   }
 }

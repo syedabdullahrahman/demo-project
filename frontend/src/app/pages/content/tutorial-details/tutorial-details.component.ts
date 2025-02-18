@@ -1,11 +1,16 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Tutorial } from 'src/app/models/tutorial.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
+  standalone: true,
   selector: 'app-tutorial-details',
+  imports: [FormsModule,
+    ReactiveFormsModule, NgIf],
   templateUrl: './tutorial-details.component.html',
   styleUrls: ['./tutorial-details.component.css']
 })
@@ -20,10 +25,10 @@ export class TutorialDetailsComponent implements OnInit {
   message = '';
   constructor(
     private tutorialService: TutorialService,
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router) { }
-  
+
   ngOnInit(): void {
     this.message = '';
     this.getTutorial(this.route.snapshot.params['id']);
@@ -72,7 +77,7 @@ export class TutorialDetailsComponent implements OnInit {
           console.log(error);
         });
   }
-  
+
   deleteTutorial(): void {
     this.tutorialService.delete(this.currentTutorial.id)
       .subscribe(
@@ -90,7 +95,7 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   username() {
-    return this.authService.userName;
+    return this.authService.getUsername();
   }
 
   logout() {
@@ -98,7 +103,7 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   login() {
-    this.authService.redirectToLoginPage();
+    this.authService.login();
   }
 
 }

@@ -1,10 +1,14 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Tutorial } from 'src/app/models/tutorial.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
+  standalone: true,
   selector: 'app-tutorials-list',
+  imports: [FormsModule, ReactiveFormsModule,NgIf,NgFor],
   templateUrl: './tutorials-list.component.html',
   styleUrls: ['./tutorials-list.component.css']
 })
@@ -13,7 +17,7 @@ export class TutorialsListComponent implements OnInit{
   currentTutorial: Tutorial = {};
   currentIndex = -1;
   title = '';
-  constructor(private tutorialService: TutorialService, private authService: AuthenticationService) { }
+  constructor(private tutorialService: TutorialService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.retrieveTutorials();
